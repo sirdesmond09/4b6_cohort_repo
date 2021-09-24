@@ -121,5 +121,30 @@
 # aList = [5, 10, 15, 25]
 # print(aList[::2])
 
-resList = [x+y for x in ['Hello ', 'Good '] for y in ['Dear', 'Bye']]
-print(resList)
+# resList = [x+y for x in ['Hello ', 'Good '] for y in ['Dear', 'Bye']]
+# print(resList)
+
+import timeit
+
+
+arr = [-1, 4, 2, -6, -6, -1, -8, 9, 0, -4, -9, -2, -6, 9, -6, -4, 5, -7, 0, 5, 0, -6, -3, 4, 6, 0, 6, -1, -5, -10]
+pos = 0
+neg = 0
+zero = 0
+
+for i in arr:
+    if i > 0:
+        pos+=1
+    elif i < 0:
+        neg+=1
+    else:
+        zero+=1
+        
+pos_ratio = pos/len(arr)
+neg_ratio = neg/len(arr)
+zero_ratio = zero/len(arr)
+
+print(round(pos_ratio, 6))
+print(round(neg_ratio, 6))
+print(round(zero_ratio, 6))
+print(timeit.timeit())
