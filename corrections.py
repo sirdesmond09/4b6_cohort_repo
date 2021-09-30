@@ -104,69 +104,71 @@
 # for x, y in zip(list1, list2):
 #     print(x, y)
 
-import time
-user_data = {}
-setup = True
+# import time
+# user_data = {}
+# setup = True
 
-while setup:
-    activity = input("Login or Sign up?\n>>").lower()
+# while setup:
+# #for i in range(1000)
+#     activity = input("Login or Sign up?\n>>").lower()
 
-    if activity == 'login':
-        email    = input("Enter your email\n>>")
-        password = input("Enter your password\n>>")
+#     if activity == 'login':
+#         email    = input("Enter your email\n>>")
+#         password = input("Enter your password\n>>")
         
-        time.sleep(2)
-        if email in user_data.keys():
-            actual_password = user_data.get(email)
+#         time.sleep(2)
+#         if email in user_data.keys():
+#             actual_password = user_data.get(email)
 
-            if actual_password == password:
+#             if actual_password == password:
 
-                print('Login successful')
-                break
-            else:
-                print("Plese enter a valid email and password.")
-        else:
-            print("There is no active user with this email")    
+#                 print('Login successful')
+#                 break
+#             else:
+#                 print("Plese enter a valid email and password.")
+#         else:
+#             print("There is no active user with this email")    
 
-    elif activity == 'signup':
-        signup=True
-        while signup:
-            email    = input("Enter your email\n>>")
-            password = input("Enter your password\n>>")
-            re_password = input("Confirm password\n>>")
-            special_char = ['@', '$', '#']
-            isValid = True
+#     elif activity == 'signup':
+#         signup=True
+#         while signup:
+#         # for i in range(1000)
+#             email    = input("Enter your email\n>>")
+#             password = input("Enter your password\n>>")
+#             re_password = input("Confirm password\n>>")
+#             special_char = ['@', '$', '#']
+#             isValid = True
 
-            if password != re_password:
-                print('Please enter matching passwords')
-                continue
-            if (len(password) < 6) or (len(password)>16):
-                print("Password length should not be less than 6")
-                isValid = False
-            elif not any(char.isdigit() for char in password):
-                print("Password should contain at least a number")
-                isValid = False
-            elif not any(char.islower() for char in password):
-                print("Password should contain at least a lowercase letter [a-z]")
-                isValid = False
-            elif not any(char.isupper() for char in password):
-                print("Password should contain at least a uppercase letter [A-Z]")
-                isValid = False
-            elif not any(char in special_char for char in password):
-                print("Password should contain at least a special character [@$#]")
-                isValid = False
-                continue
-            else:
-                user_data[email] = password
-                print(user_data)
-                signup=False
-        con = input("Press 'y' to continue and any other key to quit\n>>").lower()
-        if con == 'y':
-            continue
-        else:
-            setup=False
-    else:
-        print("Please select a valid option")
+#             if password != re_password:
+#                 print('Please enter matching passwords')
+#                 continue
+#             if (len(password) < 6) or (len(password)>16):
+#                 print("Password length should not be less than 6")
+#                 isValid = False
+#             elif not any(char.isdigit() for char in password):
+#                 print("Password should contain at least a number")
+#                 isValid = False
+#             elif not any(char.islower() for char in password):
+#                 print("Password should contain at least a lowercase letter [a-z]")
+#                 isValid = False
+#             elif not any(char.isupper() for char in password):
+#                 print("Password should contain at least a uppercase letter [A-Z]")
+#                 isValid = False
+#             elif not any(char in special_char for char in password):
+#                 print("Password should contain at least a special character [@$#]")
+#                 isValid = False
+#                 continue
+#             else:
+#                 user_data[email] = password
+#                 print(user_data)
+#                 signup=False
+#         con = input("Press 'y' to continue and any other key to quit\n>>").lower()
+#         if con == 'y':
+#             continue
+#         else:
+#             setup=False
+#     else:
+#         print("Please select a valid option")
 
 
 # x = 10
@@ -179,3 +181,19 @@ while setup:
 #     print("I am a boy")
     
 #     x=False
+
+# length1 = input("Enter the first size\n>>")
+# length2 = input("Enter the second size\n>>")
+# length3 = input("Enter the third size\n>>")
+
+# if length1==length2==length3:
+#     print("Equilaterial")
+# elif (length1==length2) or (length1==length3) or (length2==length3):
+#     print("Isoseles")
+# else:
+#     print("scalene")
+    
+
+data = [{'make':'nokia', 'model':216, 'color':'black'}, {'make':'mi max', 'model':'2', 'color':'gold'}, {'make':'samsung', 'model':7, 'color':'blue'}]
+
+print(sorted(data, key=lambda x:x['color']))
