@@ -5,6 +5,27 @@ user_data = {}
 transaction_record = {}
 keep_running = True
 
+def update_transaction_record(amount, trans_type, transaction, account_num):
+    """This function takes in the amount and other transaction details. Then it updates the transaction dictionary. It doesn't return anything."""
+    
+    trans_data = {
+        'amount':amount,
+        'trans_type':trans_type,
+        'transaction':transaction
+        }
+                        
+    transaction_record[account_num].append(trans_data)
+
+def generate_acc_num():
+    num = [str(i) for i in range(10)]
+    acc = ['9']
+    acc.extend([random.choice(num) for i in range(9)])
+    account_num = "".join(acc)
+    
+    if account_num in user_data.keys():
+        return generate_acc_num()
+    
+    return account_num
 
 while keep_running:
     user_activity = input("Enter s to signup, l to login and anyother key to quit\n>>").lower()
@@ -12,10 +33,7 @@ while keep_running:
         name = input("Name:\n>>")
         pin = input("Enter 4 digit pin:\n>>")
         
-        num = [str(i) for i in range(10)]
-        acc = ['9']
-        acc.extend([random.choice(num) for i in range(9)])
-        account_num = "".join(acc)
+        account_num =generate_acc_num()
         data = [('name', name), ('pin', pin), ('balance', 0)]
         user_data[account_num] = {}
         user_data[account_num].update(data)
@@ -24,13 +42,9 @@ while keep_running:
         
         transaction_record[account_num] = []
         
-        print(f"Your account has been successfully activated. Your account number is {account_num}. And your current balance is NGN0.\nPlease login to deposit and perform other transactions.")
+        print(f"Your account has been successfully activated. Your account number is {account_num}. And your current balance is NGN0.\nPlease login to deposit and perform other transactions.\n\n")
         
-        progress = input("Enter p to do something else and any key to quit.\n>>").lower()
-        if progress == 'p':
-            continue
-        else:
-            break
+        
     elif user_activity=='l':
         print("Enter login details below".title())
         account_num = input("Account num:\n>>")
@@ -55,29 +69,14 @@ Press any other key to logout\n>>""").lower()
                         time.sleep(2)
                         print("Insufficiant funds")
                         
-                        progress = input("Enter p to do something else and any key to logout.\n>>").lower()
-                        if progress == 'p':
-                            continue
-                        else:
-                            break
+                    
                     else:
                         account_details['balance']-=amount
                         print('Please take your cash')
                         
                         #save transaction detail
+                        update_transaction_record(amount,"Debit", "Withdrawal", account_num)
                         
-                        trans_data = {
-                            'amount':amount,
-                            'trans_type':'Debit',
-                            'transaction':'Withdrawl'
-                        }
-                        
-                        transaction_record[account_num].append(trans_data)
-                        progress = input("Enter p to do something else and any key to logout.\n>>").lower()
-                        if progress == 'p':
-                            continue
-                        else:
-                            break
                 elif action == 'd':
                     amount = float(input("Enter amount to deposit\n>>"))
                     
@@ -86,20 +85,9 @@ Press any other key to logout\n>>""").lower()
                     print('Deposit complete')
                     
                     #save transaction detail
+                    update_transaction_record(amount,"Credit", "Deposit", account_num)
                         
-                    trans_data = {
-                        'amount':amount,
-                        'trans_type':'Credit',
-                        'transaction':'Deposit'
-                    }
-                    
-                    transaction_record[account_num].append(trans_data)
-                        
-                    progress = input("Enter p to do something else and any key to logout.\n>>").lower()
-                    if progress == 'p':
-                        continue
-                    else:
-                        break   
+                      
                 elif action == 't':
                     amount = float(input("Enter amount to transfer\n>>"))
                     recepient_account = input("Enter destination account number\n>>")
@@ -112,39 +100,19 @@ Press any other key to logout\n>>""").lower()
                             account_details['balance']-=amount
                             #save transaction detail
                         
-                            trans_data = {
-                                'amount':amount,
-                                'trans_type':'Debit',
-                                'transaction':'Transfer'
-                            }
-                            
-                            transaction_record[account_num].append(trans_data)
+                            update_transaction_record(amount,"Debit", "Transfer", account_num)
                         
                             recepient['balance']+=amount
                             
                             #save transaction detail
                         
-                            beneficiary_trans_data = {
-                                'amount':amount,
-                                'trans_type':'Credit',
-                                'transaction':'Transfer'
-                            }
-                            
-                            transaction_record[recepient_account].append(beneficiary_trans_data)
+                            update_transaction_record(amount,"Credit", "Transfer", recepient_account)
                             
                             print("Transfer successful. Gerrout!")
-                            progress = input("Enter p to do something else and any key to logout.\n>>").lower()
-                            if progress == 'p':
-                                continue
-                            else:
-                                break
+                            
                     else:
                         print('No active customer for this account number. Gerrout!')
-                        progress = input("Enter p to do something else and any key to logout.\n>>").lower()
-                        if progress == 'p':
-                            continue
-                        else:
-                            break
+                        
                 elif action == 'b':
                     print(f"Your current balance is NGN{account_details['balance']}\n")
                     
@@ -170,11 +138,6 @@ Press any other key to logout\n>>""").lower()
     else:
         print("Sorry to see you go.")
         break
-
-
-print(user_data)
-print(transaction_record)
-
 
 
 
