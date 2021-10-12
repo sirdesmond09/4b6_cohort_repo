@@ -1,0 +1,1 @@
+{'9441555376': [{'amount': 1000.0, 'trans_type': 'Credit', 'transaction': 'Deposit'}], '9244954100': [{'amount': 2000.0, 'trans_type': 'Credit', 'transaction': 'Transfer'}], '9969860484': [{'amount': 30000.0, 'trans_type': 'Credit', 'transaction': 'Deposit'}, {'amount': 2000.0, 'trans_type': 'Debit', 'transaction': 'Transfer'}]}
