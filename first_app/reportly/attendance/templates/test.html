@@ -9,5 +9,13 @@
 <body>
     <h1>This is our first header</h1>
     <h4>This is another header</h4>
+
+    <ol>
+        {% for book in books %}
+            <li>{{ book.title |slugify }}</li>
+
+        {% endfor %}
+        
+    </ol>
 </body>
 </html>
