@@ -4,7 +4,7 @@ from django.dispatch import receiver
 
 
 @receiver(post_save, sender=User)
-def post_save_generate_code(sender, instance, created, *args, **kwargs):
+def post_save_send_email(sender, instance, created, *args, **kwargs):
     if created:
         
         pass

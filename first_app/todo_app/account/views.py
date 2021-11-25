@@ -34,7 +34,6 @@ def add_user(request):
             #hash password
             serializer.validated_data['password'] = make_password(serializer.validated_data['password']) #hash the given password
             user = User.objects.create(**serializer.validated_data)
-            
 
             serializer = UserSerializer(user)
             data = {
