@@ -6,6 +6,7 @@ from rest_framework import serializers, status
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from .serializers import TodoSerializer
 from .models import Todo
+from rest_framework.exceptions import PermissionDenied
 
 @swagger_auto_schema(methods=['POST'], request_body=TodoSerializer())
 @authentication_classes([BasicAuthentication])
@@ -49,7 +50,10 @@ def todo_detail(request, todo_id):
             }
 
         return Response(data, status=status.HTTP_404_NOT_FOUND)
-
+    if obj.user != request.user:
+        raise PermissionDenied(detail='You do not have permission to perform this action')
+    
+    
     if request.method == 'GET':
         serializer = TodoSerializer(obj)
         
